@@ -1,4 +1,4 @@
-# Scholara — AI Study Notes & Q&A
+# Scholar — AI Study Notes & Q&A
 
 Scholara is an AI-powered study tool that turns scanned textbook PDFs into structured notes and lets you ask questions about what you're studying. Upload a book, index its chapters, and let the AI do the reading.
 
