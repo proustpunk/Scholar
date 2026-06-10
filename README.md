@@ -102,7 +102,6 @@ pip install -r requirements.txt
 ```env
 DATABASE_URL=postgresql://youruser:yourpassword@localhost:5432/yourdb
 GROQ_API_KEY=your_groq_key
-HUGGINGFACE_API_KEY=your_hf_key
 UPLOAD_DIR=uploads
 TESSERACT_PATH=C:\Program Files\Tesseract-OCR\tesseract.exe
 ```
@@ -123,7 +122,6 @@ Visit `http://127.0.0.1:8000`
 |---|---|
 | `DATABASE_URL` | PostgreSQL connection string |
 | `GROQ_API_KEY` | From [console.groq.com](https://console.groq.com) — free |
-| `HUGGINGFACE_API_KEY` | From [huggingface.co](https://huggingface.co) — free |
 | `UPLOAD_DIR` | Folder for uploaded PDFs (default: `uploads`) |
 | `TESSERACT_PATH` | Path to Tesseract binary |
 
