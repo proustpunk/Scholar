@@ -1,0 +1,6 @@
+pdfaienv/
+__pycache__/
+*.pyc
+.env
+uploads/
+chromadb/
