@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import Header,APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.models.chat_session import ChatSession
@@ -36,7 +36,7 @@ def get_session(session_id: int, db: Session = Depends(get_db)):
 
 from app.services.rag_service import ask_question
 @router.post("/ask/{book_id}")
-def ask(book_id: int, chapter_name: str, question: str, db: Session = Depends(get_db)):
+def ask(book_id: int, chapter_name: str, question: str, db: Session = Depends(get_db),x_groq_api_key: str = Header(...)):
     try:
         # Get or create a session for this book+chapter
         session = db.query(ChatSession).filter(
@@ -56,7 +56,7 @@ def ask(book_id: int, chapter_name: str, question: str, db: Session = Depends(ge
         db.commit()
 
         # Get answer
-        answer = ask_question(book_id, chapter_name, question)
+        answer = ask_question(book_id, chapter_name, question,api_key=x_groq_api_key)
 
         # Save assistant message
         assistant_msg = Message(session_id=session.id, role="assistant", content=answer)

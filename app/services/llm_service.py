@@ -3,7 +3,7 @@ from app.core.config import settings
 
 client = Groq(api_key=settings.GROQ_API_KEY)
 
-def generate_notes(chunks: list) -> str:
+def generate_notes(chunks: list, api_key: str) -> str:
     """Send chunks to Groq and generate structured notes."""
     combined_text = "\n\n".join(chunks)
 
@@ -20,9 +20,9 @@ Text:
 {combined_text}
 
 Generate the notes now:"""
-
+    client = Groq(api_key=api_key)
     response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
+        model="openai/gpt-oss-20b",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=2048
     )

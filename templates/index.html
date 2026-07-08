@@ -632,6 +632,12 @@
     <!-- Sidebar: Documents -->
     <div class="sidebar">
         <div class="sidebar-section">
+            <div class="sidebar-section">
+    <div class="sidebar-label">Groq API Key</div>
+    <input type="text" id="groq-key-input" placeholder="gsk_..." style="width:100%; padding:8px 10px; background:var(--navy); border:1px solid var(--border-hover); border-radius:6px; font-size:12px; font-family:monospace; color:var(--text-primary); outline:none; margin-bottom:6px;">
+    <button class="btn-small btn-primary-small" style="width:100%" onclick="saveGroqKey()">Save Key</button>
+    <div class="status-bar" id="key-status"></div>
+</div>
             <div class="sidebar-label">Documents</div>
             <button class="upload-btn" onclick="toggleUploadForm()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -735,8 +741,10 @@
     let selectedChapter = null;
 
     async function init() {
-        await fetch("/session");
-        loadBooks();
+        
+    await fetch("/session");
+    loadBooks();
+    loadGroqKey();
     }
 
     function toggleUploadForm() {
@@ -936,8 +944,9 @@ function renderMarkdown(text) {
         btn.innerHTML = '<span class="spinner"></span>Processing...';
 
         const res = await fetch(`/books/${selectedBookId}/process?chapter_name=${encodeURIComponent(selectedChapter)}`, {
-            method: "POST"
-        });
+    method: "POST",
+    headers: { "X-Groq-Api-Key": localStorage.getItem("groq_api_key") || "" }
+});
 
         btn.disabled = false;
         btn.textContent = "Generate notes";
@@ -965,8 +974,9 @@ function renderMarkdown(text) {
         const typingId = appendTyping();
 
         const res = await fetch(`/chat/ask/${selectedBookId}?chapter_name=${encodeURIComponent(selectedChapter)}&question=${encodeURIComponent(question)}`, {
-            method: "POST"
-        });
+    method: "POST",
+    headers: { "X-Groq-Api-Key": localStorage.getItem("groq_api_key") || "" }
+});
 
         removeTyping(typingId);
         sendBtn.disabled = false;
@@ -1008,6 +1018,25 @@ function renderMarkdown(text) {
         const el = document.getElementById(id);
         if (el) el.remove();
     }
+
+
+    function saveGroqKey() {
+    const key = document.getElementById("groq-key-input").value.trim();
+    const status = document.getElementById("key-status");
+    if (!key) {
+        status.textContent = "Enter a key first.";
+        status.className = "status-bar error";
+        return;
+    }
+    localStorage.setItem("groq_api_key", key);
+    status.textContent = "Saved.";
+    status.className = "status-bar success";
+}
+
+function loadGroqKey() {
+    const key = localStorage.getItem("groq_api_key");
+    if (key) document.getElementById("groq-key-input").value = key;
+}
 
     init();
 </script>

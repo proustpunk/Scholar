@@ -5,7 +5,7 @@ from app.services.pdf_service import extract_pages_as_images, ocr_images, clean_
 from app.services.llm_service import generate_notes
 from app.services.rag_service import store_chunks
 
-def process_chapter(book_id: int, chapter_name: str, file_path: str, db: Session) -> Note:
+def process_chapter(book_id: int, chapter_name: str, file_path: str, db: Session, api_key: str) -> Note:
     """Full pipeline: slice → OCR → chunk → notes → store."""
 
     # Get page range from index
@@ -27,7 +27,7 @@ def process_chapter(book_id: int, chapter_name: str, file_path: str, db: Session
     store_chunks(book_id, chapter_name, chunks)
 
     # Generate notes via LLM
-    notes_content = generate_notes(chunks)
+    notes_content = generate_notes(chunks, api_key=api_key)
 
     # Save to DB
     note = Note(book_id=book_id, chapter_name=chapter_name, content=notes_content)

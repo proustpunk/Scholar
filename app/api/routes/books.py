@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Request
+from fastapi import Header,APIRouter, Depends, UploadFile, File, HTTPException, Request
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.config import settings
@@ -73,14 +73,14 @@ def get_index(book_id: int, request: Request, db: Session = Depends(get_db)):
     return db.query(BookIndex).filter(BookIndex.book_id == book_id).all()
 
 @router.post("/{book_id}/process", response_model=NoteResponse)
-def process_book_chapter(book_id: int, chapter_name: str, request: Request, db: Session = Depends(get_db)):
+def process_book_chapter(book_id: int, chapter_name: str, request: Request, db: Session = Depends(get_db), x_groq_api_key: str = Header(...)):
     user = get_current_user(request, db)
     book = db.query(Book).filter(Book.id == book_id, Book.owner_id == user.id).first()
     if not book:
         raise HTTPException(status_code=404, detail="Book not found")
 
     try:
-        note = process_chapter(book_id, chapter_name, book.file_path, db)
+        note = process_chapter(book_id, chapter_name, book.file_path, db, api_key=x_groq_api_key)
         return note
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
