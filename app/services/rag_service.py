@@ -41,14 +41,13 @@ def ask_question(book_id: int, chapter_name: str, question: str, api_key: str) -
 
     llm = ChatGroq(
         api_key=api_key,
-        model="openai/gpt-oss-20b"
+        model="meta-llama/llama-4-scout-17b-16e-instruct"
     )
 
     prompt = PromptTemplate(
         input_variables=["context", "question"],
-        template="""You are a study assistant. Answer the question based only on the context below.
-If the answer is not in the context, say so clearly.
-
+        template="""You are a study assistant. Answer the following question based only on the provided context.
+If the answer is not in the context, say so clearly. Do not generate structured notes — just answer directly and concisely.
 Context:
 {context}
 
