@@ -1,0 +1,27 @@
+Title: Price Elasticity of Demand — Theory and Applications
+
+Price elasticity of demand measures the responsiveness of quantity demanded to a change in price. It is defined as the percentage change in quantity demanded divided by the percentage change in price, holding all other factors constant (ceteris paribus).
+
+The formula is:
+Ed = (%ΔQd) / (%ΔP) = (ΔQd/Qd_avg) / (ΔP/P_avg)
+
+Demand is elastic when |Ed| > 1, meaning consumers are highly responsive to price changes. Luxury goods and products with many substitutes tend to be elastic. A 10% price increase might cause a 25% quantity drop in this case, making total revenue decrease when prices rise.
+
+Demand is inelastic when |Ed| < 1, meaning consumers are relatively unresponsive to price changes. Necessities like insulin, gasoline, and utilities tend to be inelastic. A 10% price increase might cause only a 3% quantity drop, making total revenue increase when prices rise.
+
+Unit elastic occurs when |Ed| = 1, where total revenue remains unchanged by price adjustments.
+
+The key determinants of price elasticity include: availability of substitutes (more substitutes = more elastic), necessity vs. luxury (necessities are inelastic), proportion of income spent (higher proportion = more elastic), and time horizon (demand is more elastic in the long run as consumers find alternatives).
+
+Total revenue test: If price increases and total revenue increases, demand is inelastic. If price increases and total revenue decreases, demand is elastic. This has direct pricing implications for businesses.
+
+The midpoint method ensures consistent elasticity calculations regardless of direction:
+Ed = (Q2-Q1)/((Q1+Q2)/2) ÷ (P2-P1)/((P1+P2)/2)
+
+Cross-price elasticity of demand measures how quantity demanded of good X responds to price changes in good Y:
+Exy = (%ΔQx) / (%ΔPy)
+
+Income elasticity of demand measures how quantity demanded responds to changes in consumer income:
+Ey = (%ΔQd) / (%ΔI)
+
+These elasticity concepts are crucial for tax incidence analysis, pricing strategy, and understanding how market shocks affect consumer behavior. Governments consider elasticity when taxing goods — inelastic goods are easier to tax because quantity demanded doesn't drop significantly, making them more reliable revenue sources.

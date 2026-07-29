@@ -1,0 +1,42 @@
+Procedure for conducting a titration experiment:
+
+1. Prepare equipment: burette, pipette, Erlenmeyer flask, white tile, clamp stand, wash bottle.
+2. Rinse burette with distilled water, then with the titrant solution (NaOH).
+3. Fill burette with titrant. Record initial volume to 0.05 mL precision.
+4. Use a pipette to transfer 25.00 mL of analyte (HCl) to the Erlenmeyer flask.
+5. Add 2-3 drops of phenolphthalein indicator to the flask. Solution is colorless.
+6. Place flask on white tile under burette. Slowly add titrant while swirling continuously.
+7. Watch for first permanent pink color that persists for 30 seconds. This is the endpoint.
+8. Record final burette volume. Calculate volume of titrant used.
+9. Repeat titration at least 3 times. Discard results if volumes differ by more than 0.10 mL.
+10. Calculate average titrant volume from concordant results.
+
+Data collection:
+- Initial burette reading: 0.25 mL
+- Final burette reading: 18.75 mL
+- Volume used: 18.50 mL
+- Run 2: 18.45 mL
+- Run 3: 18.55 mL
+- Average: 18.50 mL
+
+Calculations:
+Number of moles NaOH = Molarity × Volume (L)
+For NaOH with concentration 0.100 M:
+Moles NaOH = 0.100 × 0.01850 = 0.00185 mol
+
+Stoichiometry: HCl + NaOH → NaCl + H₂O (1:1 mole ratio)
+Moles HCl = Moles NaOH = 0.00185 mol
+Molarity HCl = Moles / Volume (L)
+Molarity HCl = 0.00185 / 0.02500 = 0.0740 M
+
+Precautions:
+- Remove air bubbles from burette tip before starting.
+- Titrate slowly near endpoint. Add titrant dropwise.
+- Swirl constantly to ensure thorough mixing.
+- Read meniscus at eye level to avoid parallax error.
+- Use fresh indicator solution. Phenolphthalein degrades over time.
+- Clean all glassware thoroughly. Contamination ruins results.
+- Use white tile to observe color change more clearly.
+- Record all measurements to proper significant figures.
+- Dispose of chemicals according to safety guidelines.
+- Wear safety goggles and lab coat at all times.

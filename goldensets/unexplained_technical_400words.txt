@@ -1,0 +1,34 @@
+Gradient descent optimization algorithm:
+
+Initialize parameters θ randomly
+For each epoch t:
+    Compute gradient: ∇L(θ_t) = (1/m) * Σ ∇L_i(θ_t)
+    Update: θ_{t+1} = θ_t - α * ∇L(θ_t)
+
+Learning rate α ∈ [0,1]
+Momentum update:
+    v_t = β * v_{t-1} + α * ∇L(θ_t)
+    θ_{t+1} = θ_t - v_t
+
+RMSprop:
+    E[g²]_t = β * E[g²]_{t-1} + (1-β) * g_t²
+    θ_{t+1} = θ_t - α / √(E[g²]_t + ε) * g_t
+
+Adam optimizer:
+    m_t = β₁ * m_{t-1} + (1-β₁) * g_t
+    v_t = β₂ * v_{t-1} + (1-β₂) * g_t²
+    m̂_t = m_t / (1 - β₁^t)
+    v̂_t = v_t / (1 - β₂^t)
+    θ_{t+1} = θ_t - α * m̂_t / (√v̂_t + ε)
+
+Hyperparameters: β₁=0.9, β₂=0.999, ε=10⁻⁸
+
+Batch gradient descent: uses full dataset
+Stochastic gradient descent: uses one sample
+Mini-batch gradient descent: uses batch size 32-512
+
+Convergence criteria: |L(θ_t) - L(θ_{t-1})| < δ
+Early stopping if validation loss increases for k epochs
+
+Weight decay (L₂ regularization): λ||θ||²
+L₁ regularization: λ||θ||₁

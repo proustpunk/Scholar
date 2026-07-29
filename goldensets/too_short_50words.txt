@@ -1,0 +1,1 @@
+Entropy is a measure of disorder in a thermodynamic system. The second law states that entropy in an isolated system always increases over time. This means energy spontaneously disperses from concentrated to diffuse states. Heat flows from hot to cold. Order becomes disorder naturally.

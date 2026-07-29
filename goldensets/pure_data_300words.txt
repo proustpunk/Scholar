@@ -1,0 +1,42 @@
+Quarterly sales data by region for 2024:
+
+North America:
+Q1: $4.2M, Q2: $4.8M, Q3: $5.1M, Q4: $5.9M
+
+Europe:
+Q1: $3.1M, Q2: $3.3M, Q3: $3.5M, Q4: $3.8M
+
+Asia-Pacific:
+Q1: $2.5M, Q2: $2.7M, Q3: $2.9M, Q4: $3.2M
+
+Latin America:
+Q1: $0.9M, Q2: $1.0M, Q3: $1.1M, Q4: $1.3M
+
+Total annual revenue: $45.4M
+Year-over-year growth: +8.3%
+Gross margin: 62%
+Operating margin: 24%
+Net margin: 17%
+
+R&D spending: $6.8M
+Sales and marketing: $9.2M
+General and administrative: $4.1M
+
+Cash and equivalents: $24.6M
+Accounts receivable: $8.3M
+Inventory: $5.7M
+Accounts payable: $3.2M
+Debt: $10.5M
+Equity: $32.4M
+
+Employee count: 425
+Average revenue per employee: $106,824
+Customer acquisition cost: $1,200
+Customer lifetime value: $8,400
+Churn rate: 4.5%
+
+Regional breakdown as percentage of total:
+North America: 42%
+Europe: 28%
+Asia-Pacific: 21%
+Latin America: 9%
