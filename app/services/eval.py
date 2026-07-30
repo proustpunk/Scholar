@@ -15,6 +15,27 @@ print(file_dir)
 
 client = Groq(api_key=settings.GROQ_API_KEY)
 MIN_CHARS = 100
+
+JUDGE_PROMPT = """You are grading study notes generated from a source text.
+Score the notes on each criterion below, 1-5, with a one-sentence justification.
+
+1. Structure adherence: does it follow the required layer format exactly?
+2. Groundedness: is every claim traceable to the source text (no hallucinated facts)?
+3. Concept coverage: are all concepts from the source addressed, and only those?
+4. Conflict handling: if concepts contrasted or conflicted, was that made explicit? (N/A if single concept)
+
+Respond ONLY as JSON: {{"structure": int, "groundedness": int, "coverage": int, "conflict_handling": int or "N/A", "notes": "short justification"}}
+
+<source_text>
+{source}
+</source_text>
+
+<generated_notes>
+{notes}
+</generated_notes>
+"""
+
+
 EXTRACTION_PROMPT = """
 ONLY classify the text into one and give one the tag:
 
@@ -60,9 +81,10 @@ def retries_and_backoff_gen(wrapped_text, attempt=0):
 
     try:
         response = client.chat.completions.create(
-                        model="qwen/qwen3.6-27b",
+                        #model="qwen/qwen3.6-27b",
+                        model="openai/gpt-oss-120b",
                         messages=[{"role": "user", "content": wrapped_text}],
-                        max_tokens=2048, reasoning_effort="none",      # Disable thinking
+                        max_tokens=2048, reasoning_effort="low",      # Disable thinking
                         include_reasoning=False 
                     )
             
@@ -180,29 +202,64 @@ class Eval:
         return retries_and_backoff_gen(wrapped_text)
 
 
+# for filename in os.listdir(file_dir):
+#     if not filename.endswith(".txt"):
+#         continue
+
+#     filepath = os.path.join(file_dir, filename)
+
+#     eval_obj = Eval(client, filepath)
+#     classification_response = eval_obj.extaction_json()
+#     classification_content = classification_response.choices[0].message.content
+
+#     class_path = filepath + "_classification.md"
+#     with open(class_path, "w", encoding="utf-8") as f:
+#         f.write(classification_content)
+#         print("done1")
+
+#     notes_response = eval_obj.generate_notes()
+#     notes_content = notes_response.choices[0].message.content
+
+#     notes_path = filepath + "_notes.md"
+#     with open(notes_path, "w", encoding="utf-8") as f:
+#         f.write(notes_content)
+#         print("done2")
+
+# print("done3")
+
+
+
+import json
+
+judge_results = []
+
 for filename in os.listdir(file_dir):
-    if not filename.endswith(".txt"):
-        continue
+    if filename.endswith("_notes.md"):
+        notes_path = os.path.join(file_dir, filename)
+        source_filename = filename.replace("_notes.md", "")
+        source_path = os.path.join(file_dir, source_filename)
 
-    filepath = os.path.join(file_dir, filename)
+        with open(notes_path, 'r', encoding='utf-8') as f:
+            notes = f.read()
 
-    eval_obj = Eval(client, filepath)
-    classification_response = eval_obj.extaction_json()
-    classification_content = classification_response.choices[0].message.content
+        with open(source_path, 'r', encoding='utf-8') as f:
+            source = f.read()
 
-    class_path = filepath + "_classification.md"
-    with open(class_path, "w", encoding="utf-8") as f:
-        f.write(classification_content)
-        print("done1")
+        judge_prompt = JUDGE_PROMPT.format(source=source, notes=notes)
+        response = retries_and_backoff_gen(judge_prompt)
+        content = response.choices[0].message.content
 
-    notes_response = eval_obj.generate_notes()
-    notes_content = notes_response.choices[0].message.content
+        try:
+            score = json.loads(content)
+        except json.JSONDecodeError:
+            score = {"error": "unparseable", "raw": content}
 
-    notes_path = filepath + "_notes.md"
-    with open(notes_path, "w", encoding="utf-8") as f:
-        f.write(notes_content)
-        print("done2")
+        judge_results.append({"file": source_filename, "score": score})
 
-print("done3")
+judge_path = os.path.join(file_dir, "judge_results.json")
+with open(judge_path, "w", encoding="utf-8") as f:
+    json.dump(judge_results, f, indent=2)
+
+print("done4")
 
 

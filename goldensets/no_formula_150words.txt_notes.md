@@ -1,21 +1,17 @@
 **Layer 1: The Sticky Analogy**
 
-Imagine a detective who is convinced a specific suspect committed a crime. Instead of investigating all leads, the detective only files evidence that points to the guilty party while ignoring alibis or exonerating clues.
-
-This detective’s case file becomes overwhelmingly "strong," but it is built on a foundation of selective blindness rather than full truth. **The fundamental dilemma is that seeking only what validates your starting point creates a skewed reality that feels more certain than it actually is.**
+Imagine you are hiking through a dense forest convinced there is a hidden waterfall nearby. You only notice the slight increase in humidity and ignore the dry, rocky terrain that suggests otherwise. **This selective attention keeps you on the wrong path despite contrary evidence surrounding you.**
 
 **Layer 2: The Translation**
 
-In cognitive psychology, this phenomenon is defined as confirmation bias, the tendency to favor information that supports existing beliefs. Formally, it is a systematic error in inductive reasoning where individuals selectively gather or recall data.
+Confirmation bias is the human tendency to favor information that aligns with pre-existing beliefs. It manifests as a systematic error where individuals selectively gather or interpret data to support their hypotheses. **This bias is strongest for emotionally charged issues and deeply entrenched convictions.**
 
-The tension lies between the comfort of reinforcing entrenched views and the rigorous requirement for objective evidence. This bias intensifies with emotionally charged issues, leading to overconfidence despite contrary evidence. **It acts as a primary obstacle to scientific reasoning by allowing false beliefs to persist in the face of disproving data.**
+The core trade-off is between cognitive ease and objective accuracy. Individuals prioritize information that confirms their views, often ignoring contradictory facts. **This leads to overconfidence and weakens scientific reasoning and critical thinking skills.**
 
 **Layer 3: The Exam Crib Sheet**
 
-Confirmation bias is a cognitive bias characterized by the selective search for, interpretation of, and recall of information that confirms pre-existing hypotheses. It functions as a systematic error in inductive reasoning, distinct from random error, as it follows a predictable pattern of favoring confirmatory data.
+Confirmation bias is defined as the tendency to search for, interpret, favor, and recall information that confirms pre-existing beliefs. It is categorized as a cognitive bias and a systematic error in inductive reasoning. **It operates through selective gathering, remembering, or biased interpretation of information.**
 
-This bias explains why individuals maintain overconfidence in their beliefs even when presented with evidence to the contrary. It is particularly potent in contexts involving deeply entrenched beliefs or high emotional stakes, thereby hindering critical thinking and scientific objectivity. **The core mechanism is the corruption of inductive reasoning through selective evidence processing.**
+Scenario 1: A scientist focuses only on data points that support their hypothesis while discarding anomalies. Scenario 2: A political activist ignores news sources that challenge their ideological stance. **These scenarios demonstrate how the bias maintains beliefs despite contrary evidence.**
 
-Real-world applications include medical diagnoses where doctors may overlook symptoms that contradict their initial hypothesis. In scientific research, it manifests when researchers unconsciously design experiments that are more likely to support their theoretical predictions. Political polarization is another scenario, where individuals consume news sources that only reinforce their ideological stances.
-
-A common exam "gotcha" is distinguishing between active gathering of confirmatory evidence versus passive forgetting of disconfirmatory evidence; the text defines it as both selective gathering and biased interpretation. Another potential trap is assuming this bias is random; you must identify it as a *systematic* error in reasoning, not just human error.
+Gotcha Point 1: Do not confuse this with simple ignorance; it is an active filtering mechanism. Gotcha Point 2: Recognize that the effect intensifies specifically with emotional charge and belief entrenchment. **Overconfidence in personal beliefs is the direct result of this systematic error.**

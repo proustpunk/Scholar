@@ -1,0 +1,132 @@
+[
+  {
+    "file": "contradictory_500words.txt",
+    "score": {
+      "structure": 5,
+      "groundedness": 5,
+      "coverage": 5,
+      "conflict_handling": 5,
+      "notes": "The notes follow the three\u2011layer format precisely, every statement can be traced to the source, all major schools and concepts are included, and contradictions between them are explicitly highlighted."
+    }
+  },
+  {
+    "file": "findings.txt",
+    "score": {
+      "structure": 4,
+      "groundedness": 3,
+      "coverage": 4,
+      "conflict_handling": 4,
+      "notes": "The notes follow the layered format well and address most source ideas, but they introduce extra examples not in the source, and while they note the contrast between procedural texts and essays, the handling could be more precise."
+    }
+  },
+  {
+    "file": "happy_path_500words.txt",
+    "score": {
+      "structure": 4,
+      "groundedness": 3,
+      "coverage": 3,
+      "conflict_handling": 4,
+      "notes": "The notes follow a three-layer format but include minor deviations; most statements are sourced but some examples (e.g., airlines) are not in the text; they cover most key concepts but miss cross\u2011price and income elasticity; they explicitly state the tension between price changes and total revenue."
+    }
+  },
+  {
+    "file": "injection_400words.txt",
+    "score": {
+      "structure": 5,
+      "groundedness": 3,
+      "coverage": 5,
+      "conflict_handling": 5,
+      "notes": "Follows the three-layer format exactly; includes some extraneous but plausible details not in the source, lowering groundedness; covers all source concepts comprehensively; explicitly notes the conflict that the empirical rule does not apply to skewed data."
+    }
+  },
+  {
+    "file": "narrative_250words.txt",
+    "score": {
+      "structure": 5,
+      "groundedness": 5,
+      "coverage": 5,
+      "conflict_handling": "N/A",
+      "notes": "The notes follow the three\u2011layer format precisely, all statements are traceable to the source, they address every listed factor (political turnover, economy, splits, barbarian pressures, Christianity, etc.) without adding extraneous info, and no explicit conflicts needed to be resolved."
+    }
+  },
+  {
+    "file": "no_formula_150words.txt",
+    "score": {
+      "structure": 4,
+      "groundedness": 3,
+      "coverage": 5,
+      "conflict_handling": "N/A",
+      "notes": "Mostly follows the three\u2011layer format, but adds extra headings and examples that aren\u2019t explicitly in the source, leading to slight grounding issues while still covering all key concepts."
+    }
+  },
+  {
+    "file": "opinion_200words.txt",
+    "score": {
+      "structure": 5,
+      "groundedness": 5,
+      "coverage": 4,
+      "conflict_handling": 5,
+      "notes": "The notes follow the three-layer format precisely and stay true to the source, but they omit a few minor points (dairy optional, reading labels, avoiding artificial ingredients)."
+    }
+  },
+  {
+    "file": "procedural_700words.txt",
+    "score": {
+      "structure": 2,
+      "groundedness": 2,
+      "coverage": 3,
+      "conflict_handling": "N/A",
+      "notes": "The notes loosely follow a three\u2011layer layout but add unrelated analogies and extra scenarios, and several claims (e.g., real\u2011world applications, \u201cgotcha\u201d questions) are not found in the source, reducing both structure adherence and grounding while still covering most core concepts."
+    }
+  },
+  {
+    "file": "pure_data_300words.txt",
+    "score": {
+      "structure": 5,
+      "groundedness": 5,
+      "coverage": 5,
+      "conflict_handling": 5,
+      "notes": "The notes follow the three-layer format precisely, all figures are directly traceable to the source, every listed metric from the source is included without extraneous information, and any potential contrasts are explicitly noted."
+    }
+  },
+  {
+    "file": "too_short_50words.txt",
+    "score": {
+      "structure": 5,
+      "groundedness": 5,
+      "coverage": 5,
+      "conflict_handling": "N/A",
+      "notes": "The notes follow the three\u2011layer format precisely, all statements are supported by the source, they include every concept from the text without adding extraneous ideas, and no conflicts are present to assess."
+    }
+  },
+  {
+    "file": "two_sentences_60words.txt",
+    "score": {
+      "structure": 5,
+      "groundedness": 2,
+      "coverage": 3,
+      "conflict_handling": "N/A",
+      "notes": "The notes follow the required three-layer format, but introduce several unsupported details (bakery analogy, thylakoid membranes, applications) that are not in the source, reducing groundedness and adding extraneous concepts."
+    }
+  },
+  {
+    "file": "unexplained_technical_400words.txt",
+    "score": {
+      "structure": 5,
+      "groundedness": 5,
+      "coverage": 3,
+      "conflict_handling": "N/A",
+      "notes": "The notes follow the three\u2011layer format and stay true to the source, but they omit RMSprop formula, convergence criteria, early stopping, and L1 regularization, so coverage is incomplete."
+    }
+  },
+  {
+    "file": "unstructured_5000words.txt",
+    "score": {
+      "structure": 5,
+      "groundedness": 5,
+      "coverage": 2,
+      "conflict_handling": 4,
+      "notes": "The note follows the required layered format and stays true to the source, but it only captures a subset of the many topics present, omitting most personal and miscellaneous content; however, it does explicitly note the contrasts it does include (e.g., Rust vs Python)."
+    }
+  }
+]
