@@ -54,15 +54,16 @@ ONLY classify the text into one and give one the tag:
 retry = 9
 
 
-def retries_and_backoff_extract(wrapped_text, attempt=0):
+
+def retries_and_backoff_extract(wrapped_text, REASONING_EFFORT, model="qwen/qwen3.6-27b", attempt=0):
     base_delay = 2
     max_retries = 9
 
     try:
         response = client.chat.completions.create(
-                        model="qwen/qwen3.6-27b",
+                        model=model,
                         messages=[{"role": "user", "content": wrapped_text}],
-                        max_tokens=2048, reasoning_effort="none",      # Disable thinking
+                        max_tokens=2048, reasoning_effort=REASONING_EFFORT,
                         include_reasoning=False 
                     )
             
@@ -71,20 +72,19 @@ def retries_and_backoff_extract(wrapped_text, attempt=0):
             raise
         delay = base_delay * (2 ** attempt) + random.uniform(0,1)
         time.sleep(delay)
-        response = retries_and_backoff_extract(wrapped_text, attempt+1)
+        response = retries_and_backoff_gen(wrapped_text, model=model, attempt=attempt+1)
 
     return response
 
-def retries_and_backoff_gen(wrapped_text, attempt=0):
+def retries_and_backoff_gen(wrapped_text,REASONING_EFFORT, model="openai/gpt-oss-120b", attempt=0, ):
     base_delay = 2
     max_retries = 9
 
     try:
         response = client.chat.completions.create(
-                        #model="qwen/qwen3.6-27b",
-                        model="openai/gpt-oss-120b",
+                        model=model,
                         messages=[{"role": "user", "content": wrapped_text}],
-                        max_tokens=2048, reasoning_effort="low",      # Disable thinking
+                        max_tokens=2048, reasoning_effort=REASONING_EFFORT,
                         include_reasoning=False 
                     )
             
@@ -93,7 +93,7 @@ def retries_and_backoff_gen(wrapped_text, attempt=0):
             raise
         delay = base_delay * (2 ** attempt) + random.uniform(0,1)
         time.sleep(delay)
-        response = retries_and_backoff_gen(wrapped_text, attempt+1)
+        response = retries_and_backoff_gen(wrapped_text, model=model, attempt=attempt+1)
 
     return response
 
@@ -202,6 +202,20 @@ class Eval:
         return retries_and_backoff_gen(wrapped_text)
 
 
+def choose_prompt(classification: str):
+    """Pure function: takes classification text directly, returns the right system prompt.
+    No file I/O — safe to call from production with an in-memory string."""
+
+    SYSTEM_PROMPT1 = f"""...(your full prompt 1, unchanged)..."""
+
+    SYSTEM_PROMPT2 = f"""...(your full prompt 2, unchanged)..."""
+
+    classification = classification.strip().lower()
+    if "expository" in classification:
+        return SYSTEM_PROMPT1
+    else:
+        return SYSTEM_PROMPT2
+
 # for filename in os.listdir(file_dir):
 #     if not filename.endswith(".txt"):
 #         continue
@@ -229,37 +243,37 @@ class Eval:
 
 
 
-import json
+# import json
 
-judge_results = []
+# judge_results = []
 
-for filename in os.listdir(file_dir):
-    if filename.endswith("_notes.md"):
-        notes_path = os.path.join(file_dir, filename)
-        source_filename = filename.replace("_notes.md", "")
-        source_path = os.path.join(file_dir, source_filename)
+# for filename in os.listdir(file_dir):
+#     if filename.endswith("_notes.md"):
+#         notes_path = os.path.join(file_dir, filename)
+#         source_filename = filename.replace("_notes.md", "")
+#         source_path = os.path.join(file_dir, source_filename)
 
-        with open(notes_path, 'r', encoding='utf-8') as f:
-            notes = f.read()
+#         with open(notes_path, 'r', encoding='utf-8') as f:
+#             notes = f.read()
 
-        with open(source_path, 'r', encoding='utf-8') as f:
-            source = f.read()
+#         with open(source_path, 'r', encoding='utf-8') as f:
+#             source = f.read()
 
-        judge_prompt = JUDGE_PROMPT.format(source=source, notes=notes)
-        response = retries_and_backoff_gen(judge_prompt)
-        content = response.choices[0].message.content
+#         judge_prompt = JUDGE_PROMPT.format(source=source, notes=notes)
+#         response = retries_and_backoff_gen(judge_prompt)
+#         content = response.choices[0].message.content
 
-        try:
-            score = json.loads(content)
-        except json.JSONDecodeError:
-            score = {"error": "unparseable", "raw": content}
+#         try:
+#             score = json.loads(content)
+#         except json.JSONDecodeError:
+#             score = {"error": "unparseable", "raw": content}
 
-        judge_results.append({"file": source_filename, "score": score})
+#         judge_results.append({"file": source_filename, "score": score})
 
-judge_path = os.path.join(file_dir, "judge_results.json")
-with open(judge_path, "w", encoding="utf-8") as f:
-    json.dump(judge_results, f, indent=2)
+# judge_path = os.path.join(file_dir, "judge_results.json")
+# with open(judge_path, "w", encoding="utf-8") as f:
+#     json.dump(judge_results, f, indent=2)
 
-print("done4")
+# print("done4")
 
 
