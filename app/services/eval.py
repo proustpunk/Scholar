@@ -22,7 +22,7 @@ Score the notes on each criterion below, 1-5, with a one-sentence justification.
 1. Structure adherence: does it follow the required layer format exactly?
 2. Groundedness: is every claim traceable to the source text (no hallucinated facts)?
 3. Concept coverage: are all concepts from the source addressed, and only those?
-4. Conflict handling: if concepts contrasted or conflicted, was that made explicit? (N/A if single concept)
+4. Conflict handling: if full unresolved concept even if its same subject domain, was that made explicit? (N/A if single concept)
 
 Respond ONLY as JSON: {{"structure": int, "groundedness": int, "coverage": int, "conflict_handling": int or "N/A", "notes": "short justification"}}
 
@@ -275,5 +275,18 @@ def choose_prompt(classification: str):
 #     json.dump(judge_results, f, indent=2)
 
 # print("done4")
+import json
 
-
+def compare_baseline_and_judge(baseline, judge, path):
+    fail = False
+    for key in baseline:
+        if key == "notes":
+            continue
+        try:
+            if judge.get(key) < baseline[key]:
+                fail = True
+        except TypeError:
+            pass
+    json.dump({"Verdict": not fail}, open(path, "w", encoding="utf-8"), indent=4)
+    print(f'{fail} found')
+    return not fail
