@@ -23,7 +23,10 @@ current_dir = os.getcwd()
 file_dir = os.path.join(current_dir, "goldensets")
 baseline_json = os.path.join(file_dir, "baseline.json")
 
-os.makedirs(file_dir, exist_ok=True)  # so writes below can never fail on missing dir
+print(current_dir)
+print(file_dir)
+
+#os.makedirs(file_dir, exist_ok=True)  # so writes below can never fail on missing dir
 
 PRODUCTION_MODEL = "qwen/qwen3.6-27b"
 JUDGE_MODEL = "openai/gpt-oss-120b"
@@ -84,8 +87,6 @@ def judge_note_background(note_id: int, source_text: str, notes_content: str):
     finally:
         db.close()
 
-    # DB row is already safe. Everything below is best-effort file I/O -
-    # failures here are logged, not swallowed, and never touch the DB result.
     if score is None or "error" in score:
         return
 
@@ -96,10 +97,12 @@ def judge_note_background(note_id: int, source_text: str, notes_content: str):
         logger.error(f"Failed to write score file for note {note_id}: {e}", exc_info=True)
 
     try:
-        with open(baseline_json, "r", encoding="utf-8") as f:
+        with open(baseline_json, "r", encoding="utf-8-sig") as f:
             baseline = json.load(f)
+
+            print(repr(open(baseline_json, "rb").read()))
         verdict = os.path.join(file_dir, f"{note_id}verdict.json")
-        with open(verdict, 'r', encoding='utf-8') as f:
+        with open(verdict, 'r') as f:
             compare_baseline_and_judge(baseline, score, f)
     except FileNotFoundError:
         logger.error(f"baseline.json not found at {baseline_json} - skipping floor check for note {note_id}")
