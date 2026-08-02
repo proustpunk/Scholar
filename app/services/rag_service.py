@@ -89,10 +89,15 @@ def rerank_chunks(question: str, candidates: list, top_n: int = 3):
 
 
 def build_prompt(question: str, top_chunks: list) -> str:
-    context = "\n\n".join(c["text"] for c in top_chunks)
+    context_blocks = []
+    for c in top_chunks:
+        idx = c["metadata"]["chunk_index"]
+        context_blocks.append(f"[Chunk {idx}]\n{c['text']}")
+    context = "\n\n".join(context_blocks)
 
     return f"""You are a study assistant. Answer the following question based only on the provided context.
 If the answer is not in the context, say so clearly. Do not generate structured notes — just answer directly and concisely.
+When you use information from the context, cite it inline using its chunk number, e.g. [Chunk 3].
 
 Context:
 {context}
@@ -101,11 +106,7 @@ Question: {question}
 
 Answer:"""
 
-
 def ask_question(book_id: int, chapter_name: str, question: str, api_key: str) -> str:
-    """
-    Full pipeline: retrieve wide (k=10) -> rerank narrow (top 3) -> generate.
-    """
     candidates = retrieve_candidates(book_id, chapter_name, question, k=10)
     top_chunks = rerank_chunks(question, candidates, top_n=3)
 
@@ -116,9 +117,22 @@ def ask_question(book_id: int, chapter_name: str, question: str, api_key: str) -
 
     client = Groq(api_key=api_key)
     response = client.chat.completions.create(
-        model="meta-llama/llama-4-scout-17b-16e-instruct",
+        model="qwen/qwen3.6-27b",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=1024,
+        reasoning_effort="none",
     )
 
-    return response.choices[0].message.content
+    choice = response.choices[0] if response.choices else None
+    content = choice.message.content if choice and choice.message else None
+    answer = content or "The model returned an empty response."
+
+    sources = [
+        {
+            "chunk_index": (c.get("metadata") or {}).get("chunk_index"),
+            "chapter": (c.get("metadata") or {}).get("chapter"),
+        }
+        for c in top_chunks
+    ]
+
+    return answer + f"\n\nSources: {sources}"
